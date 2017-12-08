@@ -209,9 +209,9 @@ int main(int argc, char *(argv[])) {
     printf("---------------------------------------------------------------------\n");
 
     fprintf(results, "Tiempo promedio:\t%.16g\n", time_search);
+    fprintf(results, "Rango\t%d\n", RANGE);
     fprintf(results, "Numero pivotes:\t%d\n", N_PIVOTS);
     fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
-    fprintf(results, "Rango\t%d\n", RANGE);
     fprintf(results, "Candidatos:\t%ld\n", n_candidates);
     fprintf(results, "Soluciones:\t%ld\n", n_solutions);
 
