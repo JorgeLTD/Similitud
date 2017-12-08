@@ -11,7 +11,7 @@
 //Macros
 #define DEBUG 0
 #define ITERS 5
-#define N_QUERY 8606 // Largo query
+#define N_QUERY 8606// Largo query
 #define N_DIC 77455 // Largo diccionario
 #define N_WORD 64   // Largo palabras
 
@@ -115,6 +115,7 @@ int main(int argc, char *(argv[])) {
     }
     //INICIO PRUEBAS
     for (int l = 0; l < ITERS; ++l) {
+        printf("Iter..%d\n", l);
         n_candidates = 0;
         n_solutions = 0;
         //INICIO TOMA DE TIEMPO
@@ -125,7 +126,6 @@ int main(int argc, char *(argv[])) {
             for (j = 0; j < N_PIVOTS; j++) {
                 dist_query_pivot[i][j] = edit(querys[i], pivots[j], 0, 0);
             }
-            printf("\n");
         }
 
         #if DEBUG
@@ -138,7 +138,7 @@ int main(int argc, char *(argv[])) {
             #if DEBUG
             printf("\nQUERY = %s, range = %d\n", querys[k], RANGE);
             #else
-            printf("Q = %d...\n", k);
+            //printf("Q = %d...\n", k);
             #endif
 
             //Ciclo lectura palabras diccionario
@@ -170,7 +170,7 @@ int main(int argc, char *(argv[])) {
                         printf("!!!SOLUCION!!!");
                         #endif
                         n_solutions++;
-                        fprintf(results, "w:%s | q:%s\n", words[i], querys[k]);
+                        //fprintf(results, "w:%s | q:%s\n", words[i], querys[k]);
                     }
                 }
                 #if DEBUG
@@ -187,6 +187,7 @@ int main(int argc, char *(argv[])) {
         time_search += (float) (1.0 * (1.0 * ts2.tv_nsec - ts1.tv_nsec * 1.0) * 1e-9 + 1.0 * ts2.tv_sec -
                                 1.0 * ts1.tv_sec);
 
+        fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
     }
     /*
     n_solutions = 0;
