@@ -10,7 +10,7 @@
 
 //Macros
 #define DEBUG 0
-#define ITERS 1
+#define ITERS 5
 #define N_QUERY 8606// Largo query
 #define N_DIC 77455 // Largo diccionario
 #define N_WORD 64   // Largo palabras
@@ -210,7 +210,7 @@ int main(int argc, char *(argv[])) {
 
     fprintf(results, "Tiempo promedio:\t%.16g\n", time_search);
     fprintf(results, "Numero pivotes:\t%d\n", N_PIVOTS);
-    fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
+    //fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
     fprintf(results, "Candidatos:\t%ld\n", n_candidates);
     fprintf(results, "Soluciones:\t%ld\n", n_solutions);
 
