@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #consulta y diccionario no cambian en las pruebas
-CONSULTA=querys/consulta.txt
+CONSULTA=querys/dic10.txt
 DICCIONARIO=diccionarios/dic90.txt
 
 # 1 PIVOTE!!!!!!!!!!!!!!!!

@@ -118,6 +118,7 @@ int main(int argc, char *(argv[])) {
         printf("Iter..%d\n", l);
         n_candidates = 0;
         n_solutions = 0;
+        cuentaeditdist = 0;
         //INICIO TOMA DE TIEMPO
         clock_gettime(CLOCK_REALTIME, &ts1);
 
@@ -187,11 +188,7 @@ int main(int argc, char *(argv[])) {
         time_search += (float) (1.0 * (1.0 * ts2.tv_nsec - ts1.tv_nsec * 1.0) * 1e-9 + 1.0 * ts2.tv_sec -
                                 1.0 * ts1.tv_sec);
 
-        fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
-
-        for(i=0; i< N_QUERY; i++){
-
-        }
+        //fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
 
     }
     /*
@@ -214,9 +211,11 @@ int main(int argc, char *(argv[])) {
 
     fprintf(results, "Tiempo promedio:\t%.16g\n", time_search);
     fprintf(results, "Numero pivotes:\t%d\n", N_PIVOTS);
-    //fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
+    fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
+    fprintf(results, "Rango\t%d\n", RANGE);
     fprintf(results, "Candidatos:\t%ld\n", n_candidates);
     fprintf(results, "Soluciones:\t%ld\n", n_solutions);
+
 
     fclose(results);
     fclose(index);
