@@ -10,7 +10,7 @@
 
 //Macros
 #define DEBUG 0
-#define ITERS 5
+#define ITERS 1
 #define N_QUERY 8606// Largo query
 #define N_DIC 77455 // Largo diccionario
 #define N_WORD 64   // Largo palabras
@@ -189,6 +189,10 @@ int main(int argc, char *(argv[])) {
 
         fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
 
+        for(i=0; i< N_QUERY; i++){
+
+        }
+
     }
     /*
     n_solutions = 0;
@@ -204,7 +208,7 @@ int main(int argc, char *(argv[])) {
 
     time_search = time_search / ITERS;
 
-    printf("Iteraciones:%d\nTiempo Promedio:=%.4g segundos\nCandidatos:%ld\nSoluciones:%ld\nEvaluaciones:%ld\n", ITERS,
+    printf("Iteraciones:%d\nTiempo Promedio:=%.4g segundos\nCandidatos:%ld\nSoluciones:%ld\nEvaluaciones totales:%ld\n", ITERS,
            time_search, n_candidates, n_solutions, cuentaeditdist);
     printf("---------------------------------------------------------------------\n");
 
@@ -220,11 +224,30 @@ int main(int argc, char *(argv[])) {
     fclose(q);
     fclose(p);
 
-    //liberar memoria
-    for(i=0; i< N_QUERY; i++){
+    for( i = 0; i < N_QUERY; i++){
         free(dist_query_pivot[i]);
     }
     free(dist_query_pivot);
+
+    for( i = 0; i < N_DIC; i++){
+        free(dist_word_pivot[i]);
+    }
+    free(dist_word_pivot);
+
+    for( i = 0; i < N_DIC; i++){
+        free(words[i]);
+    }
+    free(words);
+
+    for( i = 0; i < N_QUERY; i++){
+        free(querys[i]);
+    }
+    free(querys);
+
+    for( i = 0; i < N_PIVOTS; i++){
+        free(pivots[i]);
+    }
+    free(pivots);
 
     return 0;
 }
