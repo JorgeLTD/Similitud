@@ -188,9 +188,8 @@ int main(int argc, char *(argv[])) {
         time_search += (float) (1.0 * (1.0 * ts2.tv_nsec - ts1.tv_nsec * 1.0) * 1e-9 + 1.0 * ts2.tv_sec -
                                 1.0 * ts1.tv_sec);
 
-        //fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
-
     }
+
     /*
     n_solutions = 0;
     for(i = 0; i < N_QUERY; i++){
@@ -215,7 +214,6 @@ int main(int argc, char *(argv[])) {
     fprintf(results, "Rango\t%d\n", RANGE);
     fprintf(results, "Candidatos:\t%ld\n", n_candidates);
     fprintf(results, "Soluciones:\t%ld\n", n_solutions);
-
 
     fclose(results);
     fclose(index);
