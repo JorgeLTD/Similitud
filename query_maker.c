@@ -129,9 +129,9 @@ int main(int argc, char *(argv[])) {
             printf("\n");
         }
 
-#if DEBUG
+        #if DEBUG
         printf("Precalculo distancia pivote-query OK..\n");
-#endif
+        #endif
 
         //Ciclo lectura querys
         for (k = 0; k < N_QUERY; k++) {
