@@ -105,8 +105,6 @@ int main(int argc, char *(argv[])) {
         fscanf(p, "%s", pivots[i]);
     }
 
-    printf("%d\n", edit(querys[8000], pivots[3], 0, 0));
-
     printf("---------------------------------------------------------------------\n");
     printf("PIVOTES:%d\tRANGO:%d\n", N_PIVOTS, RANGE);
     printf("Analizar query...\n");
