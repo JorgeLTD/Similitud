@@ -9,22 +9,23 @@
 #include <time.h>
 
 //Macros
-#define DEBUG 0
+#define DEBUG 1
 #define BUFFER_SIZE 256
 #define ITERS 1
-#define N_QUERY 9000 //maximo query
-#define N_DIC 80000 //maximo diccionario
+#define N_QUERY 197 // maximo query
+#define N_DIC 77455 //maximo diccionario
+#define N_WORD 64   //largo palabras
 
 //Variables globales
 int long cuentaeditdist = 0;
 
-char QUERY_PATH[128] = "querys/q.txt";
-char PIVOTS_PATH[128] = "pivotes/pivote1.txt";
-int N_PIVOTS = 1;
-char DICTIONARY_PATH[128] = "diccionarios/dic90.txt";
-char INDEX_PATH[128] = "indices/index1.txt";
-int RANGE = 1;
-char RESULT_PATH[128] = "resultados/1.txt";
+char    QUERY_PATH[128];
+char    PIVOTS_PATH[128];
+int     N_PIVOTS = 1;
+char    DICTIONARY_PATH[128];
+char    INDEX_PATH[128];
+int     RANGE;
+char    RESULT_PATH[128];
 
 
 // ./query_maker query.txt pivotes.txt N_PIVOTES diccionario.txt indice.txt RANGO resultado.txt
@@ -33,7 +34,7 @@ int main(int argc, char *(argv[])) {
     int i, j, k;                                        //Iteradores
     FILE *dic, *pivots, *index, *q, *results;                      //Archivos
     char word[BUFFER_SIZE], query[BUFFER_SIZE];          //Buffer lectura archivos
-    char pivot[BUFFER_SIZE];                             //Buffer lectura archivos
+    char pivot[BUFFER_SIZE], buffer[N_WORD];                             //Buffer lectura archivos
     int D_ip, D_qp;                                     //Variables formula candidatos
     double time_search = 0;                                //Tiempo demora promedio
     struct timespec ts1, ts2;                              //Variables toma de tiempos
@@ -44,6 +45,7 @@ int main(int argc, char *(argv[])) {
         printf("Error en el numero de parametros\n");
         return -1;
     }
+
     strcpy(QUERY_PATH, argv[1]);
     strcpy(PIVOTS_PATH, argv[2]);
     N_PIVOTS = atoi(argv[3]);
@@ -51,6 +53,7 @@ int main(int argc, char *(argv[])) {
     strcpy(INDEX_PATH, argv[5]);
     RANGE = atoi(argv[6]);
     strcpy(RESULT_PATH, argv[7]);
+
 
     //Abrir archivos
     if ((dic = fopen(DICTIONARY_PATH, "r")) == NULL) {
@@ -77,28 +80,40 @@ int main(int argc, char *(argv[])) {
 
     //VARIABLES DEPENDIENTES DE LA ENTRADA
     int dist_query_pivot[N_QUERY][N_PIVOTS];
-    printf("declariom variable\n");
 
-    //int dist_word_pivot[N_DIC][N_PIVOTS];
-    //////////////////////////////////////////////////////////7
-    /*int **dist_word_pivot;
+    //CARGAR INDICE EN MEMORIA
+    int **dist_word_pivot = malloc(N_DIC * sizeof(int *));
+    for(i = 0; i < N_DIC; i++)
+        dist_word_pivot[i] = malloc(N_PIVOTS * sizeof(int));
 
-    dist_word_pivot = (int **) malloc(sizeof(int)*N_DIC)
-    */
-    int *dist_word_pivot;
-    dist_word_pivot = (int *) malloc(sizeof(int)*N_DIC*N_PIVOTS);
-    int **array = malloc(N_DIC * sizeof *array + (N_DIC * (N_PIVOTS * sizeof **array)));
+    for(i = 0; i< N_DIC; i++) {
+        for (j = 0; j < N_PIVOTS; j++) {
+            fscanf(index, "%d", &dist_word_pivot[i][j]);
+        }
+    }
 
-    dist_word_pivot[0] = 0;
+    //CARGAR QUERY EN MEMORIA
 
-    //Analizar consulta
+    char **querys = malloc(N_QUERY * sizeof(char *));
+    for(i = 0; i < N_QUERY; i++){
+        querys[i] = malloc(N_WORD * sizeof(char));
+    }
+
+    for(i = 0; i < N_QUERY; i++){
+        fscanf(q, "%s", querys[i]);
+    }
+
+
     printf("---------------------------------------------------------------------\n");
     printf("PIVOTES:%d\tRANGO:%d\n", N_PIVOTS, RANGE);
     printf("Analizar query...\n");
 
-    clock_gettime(CLOCK_REALTIME, &ts1);    //INICIO TOMA DE TIEMPO
+    /* INICIO TOMA DE TIEMPO*/
+    clock_gettime(CLOCK_REALTIME, &ts1);
+
     //Precalcular distacias pivote-query
     i = 0;
+    rewind(q);
     while (fscanf(q, "%s", query) > 0) {
         j = 0;
         rewind(pivots);
@@ -113,7 +128,6 @@ int main(int argc, char *(argv[])) {
     #endif
 
     rewind(q);
-
     //Ciclo lectura querys
     k = 0;
     while (fscanf(q, "%s", query) > 0) {
@@ -124,24 +138,19 @@ int main(int argc, char *(argv[])) {
         #endif
         rewind(dic);
         rewind(index);
-
+        i = 0;
         //Ciclo lectura palabras diccionario
         while (fscanf(dic, "%s", word) > 0) {
             //Ciclo lectura pivotes
             for(j=0; j< N_PIVOTS; j++) {
-                fscanf(index, "%d", &D_ip);
+                //fscanf(index, "%d", &D_ip);
+                D_ip = dist_word_pivot[i][j];
                 D_qp = dist_query_pivot[k][j];
 
                 if (abs(D_ip - D_qp) > RANGE) {
                     #if DEBUG
                     printf("fuera rango |\t");
                     #endif
-
-                    //consumir contenido restante linea y salir, -1 por que ya se consumio un valor
-                    while (j < N_PIVOTS - 1) {
-                        fscanf(index, "%d", &D_ip);
-                        j++;
-                    }
                     break;
                 }
                 #if DEBUG
@@ -162,6 +171,7 @@ int main(int argc, char *(argv[])) {
                     fprintf(results, "w:%s | q:%s\n", word, query);
                 }
             }
+            i++;
             #if DEBUG
             printf("/// %s", word);
             printf("\n");
