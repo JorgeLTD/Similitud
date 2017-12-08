@@ -9,12 +9,12 @@
 #include <time.h>
 
 //Macros
-#define DEBUG 1
+#define DEBUG 0
 #define BUFFER_SIZE 256
 #define ITERS 1
-#define N_QUERY 197 // maximo query
-#define N_DIC 77455 //maximo diccionario
-#define N_WORD 64   //largo palabras
+#define N_QUERY 197 // Largo query
+#define N_DIC 77455 // Largo diccionario
+#define N_WORD 64   // Largo palabras
 
 //Variables globales
 int long cuentaeditdist = 0;
@@ -78,7 +78,7 @@ int main(int argc, char *(argv[])) {
     }
     printf("Open files OK...\n");
 
-    //VARIABLES DEPENDIENTES DE LA ENTRADA
+    //TODO DECLARAR ESTA VARIABLE ANTES DE CALCULAR LAS DISTANCIAS
     int dist_query_pivot[N_QUERY][N_PIVOTS];
 
     //CARGAR INDICE EN MEMORIA
@@ -93,22 +93,20 @@ int main(int argc, char *(argv[])) {
     }
 
     //CARGAR QUERY EN MEMORIA
-
     char **querys = malloc(N_QUERY * sizeof(char *));
     for(i = 0; i < N_QUERY; i++){
         querys[i] = malloc(N_WORD * sizeof(char));
-    }
-
-    for(i = 0; i < N_QUERY; i++){
         fscanf(q, "%s", querys[i]);
     }
 
-    //TODO CARGAR DICCIONARIO EN MEMORIA
+    //CARGAR DICCIONARIO EN MEMORIA
+    char **words = malloc(N_DIC * sizeof(char *));
+    for ( i = 0; i < N_DIC ; i++ ) {
+        words[i] = malloc(N_WORD * sizeof(char));
+        fscanf(dic, "%s", words[i]);
+    }
 
-    
 
-
-    ////////////////////////////////////
 
     printf("---------------------------------------------------------------------\n");
     printf("PIVOTES:%d\tRANGO:%d\n", N_PIVOTS, RANGE);
