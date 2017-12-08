@@ -10,7 +10,6 @@
 
 //Macros
 #define DEBUG 0
-#define BUFFER_SIZE 256
 #define ITERS 5
 #define N_QUERY 8606 // Largo query
 #define N_DIC 77455 // Largo diccionario
@@ -30,12 +29,12 @@ char RESULT_PATH[128];
 // ./query_maker query.txt pivotes.txt N_PIVOTES diccionario.txt indice.txt RANGO resultado.txt
 int main(int argc, char *(argv[])) {
 
-    int i, j, k;                                        //Iteradores
-    FILE *dic, *p, *index, *q, *results;                      //Archivos
-    int D_ip, D_qp;                                     //Variables formula candidatos
-    double time_search = 0;                                //Tiempo demora promedio
-    struct timespec ts1, ts2;                              //Variables toma de tiempos
-    long int n_candidates = 0, n_solutions = 0;         //N cadidatos y soluciones
+    int i, j, k;                                            //Iteradores
+    FILE *dic, *p, *index, *q, *results;                    //Archivos
+    int D_ip, D_qp;                                         //Variables formula candidatos
+    double time_search = 0;                                 //Tiempo demora promedio
+    struct timespec ts1, ts2;                               //Variables toma de tiempos
+    long int n_candidates = 0, n_solutions = 0;             //N cadidatos y soluciones
 
     if (argc != 8) {
         printf("Error en el numero de parametros\n");
