@@ -1,0 +1,6 @@
+Evaluaciones	77707966
+Tiempo promedio:	78.30850982666016
+Numero pivotes:	4
+Evaluaciones	77707966
+Candidatos:	77673542
+Soluciones:	15916
