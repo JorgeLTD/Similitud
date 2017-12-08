@@ -10,7 +10,7 @@
 
 //Macros
 #define DEBUG 0
-#define ITERS 5
+#define ITERS 1
 #define N_QUERY 8606// Largo query
 #define N_DIC 77455 // Largo diccionario
 #define N_WORD 64   // Largo palabras
@@ -110,7 +110,7 @@ int main(int argc, char *(argv[])) {
 
     //Matriz precalculos
     int **dist_query_pivot = malloc(N_QUERY * sizeof(int *));
-    for (i = 0; i < N_DIC; i++) {
+    for (i = 0; i < N_QUERY; i++) {
         dist_query_pivot[i] = malloc(N_PIVOTS * sizeof(int));
     }
     //INICIO PRUEBAS
@@ -188,6 +188,7 @@ int main(int argc, char *(argv[])) {
                                 1.0 * ts1.tv_sec);
 
         fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
+
     }
     /*
     n_solutions = 0;
@@ -218,6 +219,12 @@ int main(int argc, char *(argv[])) {
     fclose(dic);
     fclose(q);
     fclose(p);
+
+    //liberar memoria
+    for(i=0; i< N_QUERY; i++){
+        free(dist_query_pivot[i]);
+    }
+    free(dist_query_pivot);
 
     return 0;
 }
