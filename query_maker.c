@@ -103,6 +103,12 @@ int main(int argc, char *(argv[])) {
         fscanf(q, "%s", querys[i]);
     }
 
+    //TODO CARGAR DICCIONARIO EN MEMORIA
+
+    
+
+
+    ////////////////////////////////////
 
     printf("---------------------------------------------------------------------\n");
     printf("PIVOTES:%d\tRANGO:%d\n", N_PIVOTS, RANGE);
