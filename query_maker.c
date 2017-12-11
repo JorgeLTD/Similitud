@@ -214,7 +214,7 @@ int main(int argc, char *(argv[])) {
            time_search, n_candidates, n_solutions, cuentaeditdist);
     printf("---------------------------------------------------------------------\n");
 
-    fprintf(results, "Tiempo promedio:\t%.16g\n", time_search);
+    fprintf(results, "Tiempo promedio:\t%.4g\n", time_search);
     fprintf(results, "Rango\t%d\n", RANGE);
     fprintf(results, "Numero pivotes:\t%d\n", N_PIVOTS);
     fprintf(results, "Evaluaciones\t%ld\n", cuentaeditdist);
