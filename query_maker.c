@@ -114,6 +114,7 @@ int main(int argc, char *(argv[])) {
     for (i = 0; i < N_QUERY; i++) {
         dist_query_pivot[i] = malloc(N_PIVOTS * sizeof(int));
     }
+
     //INICIO PRUEBAS
     for (int l = 0; l < ITERS; ++l) {
         printf("Iter..%d\n", l);
@@ -192,11 +193,28 @@ int main(int argc, char *(argv[])) {
     }
 
     /*
+    FILE *copiadic, *copiaquery;
+    copiadic=fopen("copia_dic.txt","w");
+    copiaquery=fopen("copia_query.txt","w");
+
+    for(i=0; i< N_DIC; i++){
+        fprintf(copiadic,"%s\n", words[i]);
+    }
+
+    for(i=0; i< N_QUERY; i++){
+        fprintf(copiaquery, "%s\n", querys[i]);
+    }
+
+    fclose(copiadic);
+    fclose(copiaquery);
+
     n_solutions = 0;
+
+
     for(i = 0; i < N_QUERY; i++){
-        printf("%d...\n", i);
+        //printf("%d...\n", i);
         for(j = 0; j < N_DIC; j++){
-            if (edit(querys[i], words[j],0,0) <= 1){
+            if (edit(querys[i], words[j],0,0) <= RANGE){
                 n_solutions++;
             }
         }
