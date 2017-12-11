@@ -10,7 +10,7 @@
 
 //Macros
 #define DEBUG 0
-#define ITERS 1
+#define ITERS 2
 #define N_QUERY 8606// Largo query
 #define N_DIC 77455 // Largo diccionario
 #define N_WORD 64   // Largo palabras
@@ -104,6 +104,7 @@ int main(int argc, char *(argv[])) {
         fscanf(p, "%s", pivots[i]);
     }
 
+    //printf("%d\n", edit("aino", "ino",0,0));
     printf("---------------------------------------------------------------------\n");
     printf("PIVOTES:%d\tRANGO:%d\n", N_PIVOTS, RANGE);
     printf("Analizar query...\n");
