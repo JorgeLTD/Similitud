@@ -1,6 +1,0 @@
-Tiempo promedio:	0
-Rango	1
-Numero pivotes:	4
-Evaluaciones	666577730
-Candidatos:	0
-Soluciones:	15916

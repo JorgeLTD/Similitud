@@ -10,7 +10,7 @@
 
 //Macros
 #define DEBUG 0
-#define ITERS 2
+#define ITERS 1
 #define N_QUERY 8606// Largo query
 #define N_DIC 77455 // Largo diccionario
 #define N_WORD 64   // Largo palabras
@@ -173,7 +173,7 @@ int main(int argc, char *(argv[])) {
                         printf("!!!SOLUCION!!!");
                         #endif
                         n_solutions++;
-                        //fprintf(results, "w:%s | q:%s\n", words[i], querys[k]);
+                        //fprintf(results, "%s %s\n", querys[k], words[i]);
                     }
                 }
                 #if DEBUG
@@ -192,6 +192,7 @@ int main(int argc, char *(argv[])) {
 
     }
 
+
     /*
     FILE *copiadic, *copiaquery;
     copiadic=fopen("copia_dic.txt","w");
@@ -207,19 +208,31 @@ int main(int argc, char *(argv[])) {
 
     fclose(copiadic);
     fclose(copiaquery);
+    */
+    /*
+    printf("p-q %d\n ", edit("áfaca","faca",0,0));
+    */
 
+    /*
     n_solutions = 0;
 
 
+    clock_gettime(CLOCK_REALTIME, &ts1);
     for(i = 0; i < N_QUERY; i++){
-        //printf("%d...\n", i);
+        printf("%d...\n", i);
         for(j = 0; j < N_DIC; j++){
             if (edit(querys[i], words[j],0,0) <= RANGE){
                 n_solutions++;
             }
         }
     }
+    clock_gettime(CLOCK_REALTIME, &ts2);
+    time_search += (float) (1.0 * (1.0 * ts2.tv_nsec - ts1.tv_nsec * 1.0) * 1e-9 + 1.0 * ts2.tv_sec -
+                            1.0 * ts1.tv_sec);
+
     */
+
+
 
     time_search = time_search / ITERS;
 

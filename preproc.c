@@ -24,11 +24,11 @@ int main(int argc, char *argv[]){
         printf("Error load [DIC]\n");
         return -1;
     }
-    if( ( pivot = fopen("pivotes/pivote32.txt", "r") ) == NULL){
+    if( ( pivot = fopen("pivotes/pivote1.txt", "r") ) == NULL){
         printf("Error load [PIVOT]\n");
         return -1;
     }
-    if( (index = fopen("indices/90_32.txt", "w") ) == NULL){
+    if( (index = fopen("indices/90_1.txt", "w") ) == NULL){
         printf("Error load [INDEX]\n");
         return -1;
     }
