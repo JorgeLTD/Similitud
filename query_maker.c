@@ -10,7 +10,7 @@
 
 //Macros
 #define DEBUG 0
-#define ITERS 1
+#define ITERS 5
 #define N_QUERY 8606// Largo query
 #define N_DIC 77455 // Largo diccionario
 #define N_WORD 64   // Largo palabras
@@ -18,13 +18,13 @@
 //Variables globales
 int long cuentaeditdist = 0;
 
-char QUERY_PATH[128];
-char PIVOTS_PATH[128];
-int N_PIVOTS = 1;
-char DICTIONARY_PATH[128];
-char INDEX_PATH[128];
-int RANGE;
-char RESULT_PATH[128];
+char    QUERY_PATH[128];
+char    PIVOTS_PATH[128];
+int     N_PIVOTS;
+char    DICTIONARY_PATH[128];
+char    INDEX_PATH[128];
+int     RANGE;
+char    RESULT_PATH[128];
 
 // ./query_maker query.txt pivotes.txt N_PIVOTES diccionario.txt indice.txt RANGO resultado.txt
 int main(int argc, char *(argv[])) {
@@ -67,7 +67,7 @@ int main(int argc, char *(argv[])) {
         return -1;
     }
     if ((results = fopen(RESULT_PATH, "w")) == NULL) {
-        printf("error resultados\n");
+        printf("Error open [RESULTADOS]\n");
         return -1;
     }
     printf("Open files OK...\n");
@@ -189,33 +189,10 @@ int main(int argc, char *(argv[])) {
         clock_gettime(CLOCK_REALTIME, &ts2);    //FIN TOMA DE TIEMPO
         time_search += (float) (1.0 * (1.0 * ts2.tv_nsec - ts1.tv_nsec * 1.0) * 1e-9 + 1.0 * ts2.tv_sec -
                                 1.0 * ts1.tv_sec);
-
     }
-
-
-    /*
-    FILE *copiadic, *copiaquery;
-    copiadic=fopen("copia_dic.txt","w");
-    copiaquery=fopen("copia_query.txt","w");
-
-    for(i=0; i< N_DIC; i++){
-        fprintf(copiadic,"%s\n", words[i]);
-    }
-
-    for(i=0; i< N_QUERY; i++){
-        fprintf(copiaquery, "%s\n", querys[i]);
-    }
-
-    fclose(copiadic);
-    fclose(copiaquery);
-    */
-    /*
-    printf("p-q %d\n ", edit("áfaca","faca",0,0));
-    */
 
     /*
     n_solutions = 0;
-
 
     clock_gettime(CLOCK_REALTIME, &ts1);
     for(i = 0; i < N_QUERY; i++){
@@ -229,10 +206,7 @@ int main(int argc, char *(argv[])) {
     clock_gettime(CLOCK_REALTIME, &ts2);
     time_search += (float) (1.0 * (1.0 * ts2.tv_nsec - ts1.tv_nsec * 1.0) * 1e-9 + 1.0 * ts2.tv_sec -
                             1.0 * ts1.tv_sec);
-
     */
-
-
 
     time_search = time_search / ITERS;
 
